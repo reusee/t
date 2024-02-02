@@ -59,8 +59,10 @@ func main() {
 		llamaCPPPath,
 		"--model", modelPath,
 		"--prompt", `
-Please translate this text to simple, concise English: [`+text+`].
-If the translated text includes less than 10 words, give at least 5 examples of how to use it in English.
+Nobody knows any language in the world better than you.
+You are really good at teaching language.
+Please explain this text in simple, easy to understand English: `+text+`.
+Then please give at least 5 examples of how to use it in English.
 `,
 		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
 		"--ctx-size", "0",
