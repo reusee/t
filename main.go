@@ -30,14 +30,21 @@ func main() {
 	cacheDir, err := os.UserCacheDir()
 	ce(err)
 
-	var modelPath string
+	var modelPath, modelName string
 	for _, path := range []string{
 		filepath.Join(homeDir, ".llama.model"),
 		filepath.Join(homeDir, "llama.model"),
 	} {
-		_, err := os.Stat(path)
+		info, err := os.Lstat(path)
 		if err == nil {
 			modelPath = path
+			if info.Mode()&os.ModeSymlink > 0 {
+				dest, err := os.Readlink(path)
+				if err != nil {
+					continue
+				}
+				modelName = filepath.Base(dest)
+			}
 			break
 		}
 	}
@@ -55,7 +62,7 @@ func main() {
 Please translate this text to simple, concise English: [`+text+`].
 If the translated text includes less than 10 words, give at least 5 examples of how to use it in English.
 `,
-		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache"),
+		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
 		"--ctx-size", "0",
 		"--color",
 		"--mlock",
