@@ -51,7 +51,10 @@ func main() {
 	cmd := exec.Command(
 		llamaCPPPath,
 		"--model", modelPath,
-		"--prompt", `Please translate [`+text+`] to English in simple and concise words`,
+		"--prompt", `
+Please translate this text to simple and basic English: [`+text+`].
+If the text includes less than 10 words, give at least 5 examples of how to use it.
+`,
 		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache"),
 		"--ctx-size", "0",
 		"--color",
