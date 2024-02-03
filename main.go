@@ -61,8 +61,8 @@ func main() {
 		"--prompt", `
 Nobody knows any language in the world better than you.
 You are really good at teaching language.
-Please explain this text in simple, easy to understand English: `+text+`.
-Then please give at least 5 examples of how to use it in English.
+Please explain the following text in simple, easy to understand English: `+text+`.
+After explaining, please give at least 5 examples of how to use it in English.
 `,
 		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
 		"--ctx-size", "0",
