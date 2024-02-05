@@ -58,11 +58,12 @@ func main() {
 	cmd := exec.Command(
 		llamaCPPPath,
 		"--model", modelPath,
-		"--prompt", `
+		"--prompt", `[INST]
 Nobody knows any language in the world better than you.
 You are really good at teaching language.
 Please explain the following text in simple, easy to understand English: `+text+`.
 After explaining, please give at least 5 examples of how to use it in English.
+[/INST]
 `,
 		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
 		"--ctx-size", "0",
