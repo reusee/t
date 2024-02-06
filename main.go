@@ -44,6 +44,8 @@ func main() {
 					continue
 				}
 				modelName = filepath.Base(dest)
+			} else {
+				modelName = filepath.Base(modelPath)
 			}
 			break
 		}
@@ -52,6 +54,7 @@ func main() {
 		slog.Warn("no model")
 		return
 	}
+	pt("model: %s\n", modelName)
 
 	text := strings.Join(os.Args[1:], " ")
 
@@ -66,10 +69,11 @@ After explaining, please give at least 5 examples of how to use it in English.
 [/INST]
 `,
 		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
-		"--ctx-size", "0",
+		//"--ctx-size", "0",
 		"--color",
 		"--mlock",
 		"--log-disable",
+		"-ngl", "30",
 	)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
