@@ -29,6 +29,7 @@ func main() {
 	ce(err)
 	cacheDir, err := os.UserCacheDir()
 	ce(err)
+	_ = cacheDir
 
 	var modelPath, modelName string
 	for _, path := range []string{
@@ -62,18 +63,18 @@ func main() {
 		llamaCPPPath,
 		"--model", modelPath,
 		"--prompt", `[INST]
-Nobody knows any language in the world better than you.
-You are really good at teaching language.
+You master every language in the world.
+And you are really good at teaching languages.
 Please explain the following text in simple, easy to understand English: `+text+`.
 After explaining, please give at least 5 examples of how to use it in English.
 [/INST]
 `,
-		"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
-		//"--ctx-size", "0",
+		//"--prompt-cache", filepath.Join(cacheDir, "llm-translate-cache."+modelName),
+		"--ctx-size", "4096",
 		"--color",
 		"--mlock",
 		"--log-disable",
-		"-ngl", "30",
+		"-ngl", "20",
 	)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
