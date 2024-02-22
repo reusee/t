@@ -66,6 +66,7 @@ func main() {
 You master every language in the world.
 And you are really good at teaching languages.
 Please explain the following text in simple, easy to understand English: `+text+`.
+Then explain the text in Chinese.
 After explaining, please give at least 5 examples of how to use it in English.
 [/INST]
 `,
